@@ -1,0 +1,48 @@
+===================Prerequisite============
+0. Install JDK and JRE
+1. Install the mysql server 
+2. Install the Soot framework 
+-You can download Soot from the following web page: http://www.sable.mcgill.ca/soot/
+3. Create a schema named "mobileapps" 
+4. Load the appropriate data 
+-mysql -u [uname] -p[pass] mobileapps < mobileapps.sql
+5. put all the files under the following directory
+- ~/mobileApps/results/
+
+============= Analysis ====================
+
+
+1. Run an android emulator
+-A description for how to employ an emulator can be found: http://developer.android.com/tools/devices/managing-avds-cmdline.html
+-Run the emulator: emulator @AVD_for_Galaxy_Nexus_by_Google (where @AVD_for_Galaxy_Nexus_by_Google is the name of the device)
+
+2. Run the analysis framework
+-./automation.sh
+
+3. Files
+Inputs to the analysis framework. Note these files are created during the instrumentation and the execution of the examined application. 
+"output-final-static.app_name.txt"== Contains the static analysis data 
+"output-final-dynamic.app_name.txt"== Contains the dynamic analysis data 
+"manifest-permissions.app_name.txt" == Contains manifest data 
+
+Outputs:
+app_name.permissionMap-static.txt == Contains the map of APIs - permissions included in the static analysis 
+app_name.static-final-analysis.txt == Contains the permissions existing both in manifest and in static analysis 
+app_name.api-without-permission-in-manifest-static.txt == Contains the APIs without permissions in the manifest static analysis
+app_name.unused-permissions-static.txt == Contains the needless permissions - Final static results.
+app_name.permissionMap-dynamic.txt == Contains the map of APIs - permissions included in the dymanic analysis
+app_name.dynamic-final-analysis.txt == Contains the permissions existing both in manifest and in dynamic analysis 
+app_name.api-without-permission-in-manifest-dynamic.txt == Contains the APIs without permissions in the manifest static analysis
+app_name.unused-permissions-dynamic.txt == Contains the needless permissions - Final static results
+
+
+
+
+===================Note=================
+
+We do not provide any apk for analysis, you have to donwload from a market or extract them from the phone.  
+
+
+
+
+
