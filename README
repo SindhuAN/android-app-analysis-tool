@@ -6,8 +6,13 @@
 3. Create a schema named "mobileapps" 
 4. Load the appropriate data 
 -mysql -u [uname] -p[pass] mobileapps < mobileapps.sql
-5. put all the files under the following directory
-- ~/mobileApps/results/
+5. Download or clone our solution 
+6. In "run-instr.sh" script  update the following variables according to your set-up
+ANDROID_JARS_DIR=
+SOOT_OUTPUT_DIR=
+APPS_DIR=
+7. In automation.sh script update the line 17 with the same directory of APPS_DIR
+
 
 ============= Analysis ====================
 
@@ -21,20 +26,32 @@
 
 3. Files
 Inputs to the analysis framework. Note these files are created during the instrumentation and the execution of the examined application. 
-"output-final-static.app_name.txt"== Contains the static analysis data 
-"output-final-dynamic.app_name.txt"== Contains the dynamic analysis data 
-"manifest-permissions.app_name.txt" == Contains manifest data 
+
+1. static-analysis.app_name.txt == Contains all the raw data of the static analysis
+2. dynamic-analysis.app_name.txt == Contains all the raw data of the dynamic analysis
+3. output-final-static.app_name.txt == Contains the static analysis data 
+4. output-final-dynamic.app_name.txt == Contains the dynamic analysis data 
+5. manifest-permissions.app_name.txt == Contains manifest data 
 
 Outputs:
-app_name.permissionMap-static.txt == Contains the map of APIs - permissions included in the static analysis 
-app_name.static-final-analysis.txt == Contains the permissions existing both in manifest and in static analysis 
-app_name.api-without-permission-in-manifest-static.txt == Contains the APIs without permissions in the manifest static analysis
-app_name.unused-permissions-static.txt == Contains the needless permissions - Final static results.
-app_name.permissionMap-dynamic.txt == Contains the map of APIs - permissions included in the dymanic analysis
-app_name.dynamic-final-analysis.txt == Contains the permissions existing both in manifest and in dynamic analysis 
-app_name.api-without-permission-in-manifest-dynamic.txt == Contains the APIs without permissions in the manifest static analysis
-app_name.unused-permissions-dynamic.txt == Contains the needless permissions - Final static results
 
+1.  app_name.permissionMap-static.txt == Contains the map of APIs - permissions included in the static analysis 
+2.  app_name.static-mapping.txt == Contains the same data as the previous one
+3.  app_name.static-final-analysis.txt == Contains the permissions existing both in manifest and in static analysis 
+4.  app_name.api-without-permission-in-manifest-static.txt == Contains the APIs without permissions in the manifest static analysis
+5.  app_name.unused-permissions-static.txt == Contains the needless permissions - Final static results.
+6.  app_name.permissionMap-dynamic.txt == Contains the map of APIs - permissions included in the dymanic analysis
+7.  app_name.dynamic-mapping.txt == Contains the same data as the previous one
+8.  app_name.dynamic-final-analysis.txt == Contains the permissions existing both in manifest and in dynamic analysis 
+9.  app_name.api-without-permission-in-manifest-dynamic.txt == Contains the  permission (and APIs) identified in dynamic analysis and do not exist in manifest 
+10. app_name.unused-permissions-dynamic.txt == Contains the needless permissions - Final static results
+11. api_name.static-dynamic-similarities.txt == Contains the APIs - permissions that are common to dynamic and in static analysis
+12. api_name.android.static-not-in-dynamic.txt == Contains the APIs - permission that exist in static analysis and not in dynamic 
+13  manifest-permissions.app_name.txt == Contains the permissions defined in the manifest
+
+
+uniq-calls-dynamic.name_app.txt == Contains the unique APIs deteremined in dynamic analysis
+uniq-calls-static.name_app.txt == Contains the unique APIs deteremined in static analysis
 
 
 
