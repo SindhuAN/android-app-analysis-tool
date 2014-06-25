@@ -6,12 +6,14 @@
 
 
 $num_args = $#ARGV + 1;
-if ($num_args != 1) {
+if ($num_args != 2) {
   print "\nUsage: db.pl application-name\n";
   exit;
 }
 
 $app_name=$ARGV[0];
+$app_name2=$ARGV[1];
+print $app_name2;
 #print $app_name;
 $file_instr_static = "output-final-static.$app_name.txt";
 $file_instr_dynamic = "output-final-dynamic.$app_name.txt";
@@ -19,16 +21,17 @@ $file_manif = "manifest-permissions.$app_name.txt";
 #file_manif.$app
 
 
-$table_instr_static = $app_name."Static";
-$table_instr_dynamic = $app_name . "Dynamic";
-$table_manif= $app_name."Manifest";
-$table_view_static = $app_name."ViewStatic";
-$table_view_dynamic = $app_name."ViewDynamic";
+$table_instr_static = $app_name2."Static";
+$table_instr_dynamic = $app_name2."Dynamic";
+$table_manif= $app_name2."Manifest";
+$table_view_static = $app_name2."ViewStatic";
+$table_view_dynamic = $app_name2."ViewDynamic";
 
  
 #create the table of the static analysis
 print "static loading";
 $sql_create_table_static_instr = "create table $table_instr_static (apiName VARCHAR(600) NOT NULL PRIMARY KEY)";
+print "sql:$sql_create_table_static_instr";
 $sth = $dbh->prepare($sql_create_table_static_instr);
 $sth->execute or die "SQL Error: $DBI::errstr\n";
 
@@ -425,6 +428,10 @@ close(MYFILE);
  $drop3 = "drop table $table_manif";
  $drop4 = "drop view  $table_view_static";
  $drop5 = "drop view  $table_view_dynamic";
+
+  print "$drop1";
+  print "$drop2";
+
 
  $sth = $dbh->prepare( $drop1);
  $sth->execute or die "SQL Error: $DBI::errstr\n";

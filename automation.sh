@@ -12,7 +12,7 @@
 #adb -s emulator-5554 uninstall com.example.hello
 #I have to change the 
 
-for file in ~/mobileApps/results/*.apk
+for file in /home/oper/repo/mobileApps/*.apk
 do
 	echo $file
 	basenamefile=$(basename $file .apk)
@@ -27,8 +27,8 @@ do
 	echo "$(sed 's/package=//g' package.txt )" > package.txt
 	echo "$(sed 's/["]//g' package.txt)" > package.name.$basenamefile.txt
 	cp package.name.$basenamefile.txt package.txt
-	
-
+	echo "$(sed 's/[.]//g' package.txt)" > package2.txt	
+	read -r packageName<package2.txt
 	read -r packagename<package.name.$basenamefile.txt
 	echo "packagename:$packagename"
 	rm -r $basenamefile
@@ -45,9 +45,7 @@ do
 	./static-modify.sh $basenamefile
 	./manifest-perm.sh $basenamefile
 	
-	./db-for-dynamic-static-analysis.pl $basenamefile
-	#exit
-#	rm package.txt
+	./db-for-dynamic-static-analysis.pl $basenamefile $packageName
 done
 
 
